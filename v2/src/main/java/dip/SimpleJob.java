@@ -4,13 +4,9 @@ import java.io.PrintStream;
 
 // tag::code[]
 public class SimpleJob implements Job {
-
-    public String getName() {
-        return "Simple";
-    }
-
-    public Schedule getSchedule() {
-        return Schedule.DAILY;
+    public void register(Registrar registrar) {
+        registrar.daily("Simple", this);
+        registrar.hourly("Simple", this);
     }
 
     public void run(PrintStream output) {

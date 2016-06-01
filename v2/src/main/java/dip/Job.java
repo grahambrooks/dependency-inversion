@@ -4,9 +4,7 @@ import java.io.PrintStream;
 
 // tag::code[]
 public interface Job {
-    String getName();
-    Schedule getSchedule();
+    void register(Registrar registrar);
     void run(PrintStream output);
 }
 // end::code[]
-

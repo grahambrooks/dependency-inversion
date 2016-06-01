@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 // tag::code[]
-public class Application {
+public class Application implements Registrar {
     private final Map<String, Job> hourlyJobs = new HashMap<String, Job>();
     private final Map<String, Job> dailyJobs = new HashMap<String, Job>();
 
@@ -14,15 +14,15 @@ public class Application {
 
     private void run() {
         final Job job = new SimpleJob();
+        job.register(this);
+    }
 
-        switch (job.getSchedule()) {
-            case HOURLY:
-                hourlyJobs.put(job.getName(), job);
-                break;
-            case DAILY:
-                dailyJobs.put(job.getName(), job);
-                break;
-        }
+    public void daily(String name, Job job) {
+        dailyJobs.put(name, job);
+    }
+
+    public void hourly(String name, Job job) {
+        hourlyJobs.put(name, job);
     }
 }
 // end::code[]
